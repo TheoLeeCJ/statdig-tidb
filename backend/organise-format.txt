@@ -1,0 +1,15 @@
+You have collected various data from the web searches. Now, use the information you have gathered to enrich the malware report you were given, in the JSON specified. If there is data from the web searches to enrich it then do so, otherwise just summarise and re-iterate the main points of the original report.
+
+You should also analyse the functions given and pick which ones are "contentful" (i.e. crucial to understanding the malware) and write an appropriate description of contentful ones which fully captures what it is trying to do and includes the IOCs specific to that function.
+
+To tag the binary, you may choose from existing tags or create your own.
+{TAGS}
+
+{
+  "iocs_table": "" // markdown-formatted table with 3 columns: IOC type, IOC itself, and if applicable, web search comments
+  "updated_overview": "" // text-only overview with additional information from the web searches if any. if there isn't any useful information from your searches, you should just re-iterate the original report keeping the key points
+  "tags": ["tag1", "tag2"], // if applicable, use existing tags. but feel free to create your own. tags should describe techniques used in the malware, its type and what it does, etc.
+  "contentful_functions": {
+    "function_name": "description"
+  }
+}

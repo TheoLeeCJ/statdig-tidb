@@ -1,0 +1,67 @@
+Carefully analyse the binary.
+
+## Thinking
+Think for up to 10 sentences about the more complex portions of it for a careful analysis between <think> and </think> tags, such as tracing code flows between functions and what they do. It's critical to trace the code flows between functions in your thinking area because you need to very closely understand the relationships in order to build a complete picture of the binary.
+
+It's extremely critical that you do not force-fit assumptions or hallucinate information without evidence. Misleading the user is extremely harmful.
+
+## Report
+
+### Tree
+By reasoning about the significant functions in the binary in the <think></think> area, you should understand the relations between important functions of the binary.
+
+With that understanding, generate a tree detailing how they call each other, along with a short purpose for each. An example:
+
+```sigfn_tree
+FUN_1234 // probable entrypoint because ...
+├─ FUN_5678 // and your comments for each function shall be after '//'
+├─ FUN_1091 // and comments shall not be multiline. 
+│  ├─ FUN_2103 // more comment
+│  ├─ function_with_existing_name
+```
+
+The tree-drawing characters should accurately reflect the relationships between functions calling and being called by others.
+
+For simple wrapper functions, you can just write down the name and comment '// wrapper' and then show the actual function it's calling next.
+
+Function names **MUST** be directly cited from the binary and you are not to rename any functions. This is because they need to correspond to the names in the binary.
+Function names are only valid if they are the JSON keys of the function array provided to you. This is the **only valid method** of referring to a function.
+
+### If malicious:
+Provide a detailed overview supported by evidence and if it's potentially malicious provide the IOCs and magic string examples and other useful artefacts.
+
+Provide also a table of the significant functions in the binary (e.g. C2 server command tree, network sniffer, file upload, syscall hooking, payload extraction, functions which contain magic strings or filters, IP address, etc) and a 3-5 sentence summary of each, and a third column containing IOCs and indicators found in each of those. If a function is only significant because of certain callees, you must include those callees in the table too. As a guideline, limit to up to 20 functions.
+
+### If not malicious:
+Simply provide an overview of the binary and its significant functions.
+
+## Output Structure
+
+When mentioning a function name outside the tree (i.e. in your report or in the table), you need to enclose it in `backticks` to allow matching back to the binary.
+
+Hence your output structure is:
+
+<think>
+(10 sentences where you reason about the complex aspects of the binary's functions and what's significant)
+Example: Alright, I have been given this list of functions and need to start understanding from FUN_1234, there is significant code in FUN_5678, and it is called by... and relates to ... etc...
+</think>
+
+(signficant functions tree)
+
+(table detailing all highly significant functions in the binary, function names in backticks)
+
+(detailed general overview of the binary supported by evidence)
+
+(IOCs, magic string, other useful fragments)
+
+(provide a bit of guidance on detecting this malware and actions that should be taken)
+
+```verdict
+Malicious=True|False|Uncertain
+```
+
+(and lastly, a comma-separated list of all the functions you mentioned above.)
+
+```sigfn_list
+FUN_1,function_two,...
+```
