@@ -324,7 +324,7 @@ onMounted(async () => {
     const sampleData = await sampleResp.json()
     binaryDetails.value = sampleData.samples.find(s => s.md5 === md5)
     // AUTOMATION: If malicious and organiser not run, start organiser agent
-    /*if (binaryDetails.value && binaryDetails.value.malicious === 'True' && ![5,6].includes(binaryDetails.value.analyze_state)) {
+    if (binaryDetails.value && binaryDetails.value.malicious === 'True' && ![5,6].includes(binaryDetails.value.analyze_state)) {
       try {
         await fetch(`${apiBase}/organise/${md5}`, {
           method: 'POST',
@@ -336,7 +336,7 @@ onMounted(async () => {
       } catch (e) {
         // ignore errors
       }
-    }*/
+    }
   }
   // Load report and sigfn_tree
   const resp = await fetch(`${apiBase}/analyze/${md5}`, {
